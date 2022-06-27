@@ -62,7 +62,7 @@ func ValidBatch(batch *BatchData, config *rollup.Config, epoch eth.BlockID, minL
 }
 
 // FillMissingBatches turns a collection of batches to the input batches for a series of blocks
-func FillMissingBatches(batches []*BatchWithL1InclusionBlock, inclusionBlock, epoch eth.BlockID, blockTime, minL2Time, nextL1Time uint64) []*BatchWithL1InclusionBlock {
+func FillMissingBatches(batches []*BatchWithL1InclusionBlock, inclusionBlock eth.L1BlockRef, epoch eth.BlockID, blockTime, minL2Time, nextL1Time uint64) []*BatchWithL1InclusionBlock {
 	m := make(map[uint64]*BatchWithL1InclusionBlock)
 	// The number of L2 blocks per sequencing window is variable, we do not immediately fill to maxL2Time:
 	// - ensure at least 1 block

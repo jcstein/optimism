@@ -6,11 +6,17 @@ import (
 	"io"
 	"time"
 
+	"github.com/ethereum-optimism/optimism/l2geth/core/types"
 	"github.com/ethereum-optimism/optimism/op-node/eth"
 	"github.com/ethereum-optimism/optimism/op-node/rollup"
+	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/common/hexutil"
 	"github.com/ethereum/go-ethereum/log"
 )
+
+type L1ReceiptsFetcher interface {
+	Fetch(ctx context.Context, blockHash common.Hash) (eth.L1Info, types.Transactions, types.Receipts, error)
+}
 
 type PayloadQueueOutput interface {
 	AddSafeAttributes(attributes *eth.PayloadAttributes)
@@ -23,6 +29,7 @@ type PayloadQueue struct {
 	dl        L1ReceiptsFetcher
 	next      PayloadQueueOutput
 	resetting bool
+	progress  Progress
 
 	l1Origins []eth.L1BlockRef
 	batches   []*BatchData
@@ -38,20 +45,18 @@ func NewPayloadQueue(log log.Logger, cfg *rollup.Config, l1Fetcher L1ReceiptsFet
 }
 
 func (pq *PayloadQueue) AddBatch(batch *BatchData) {
-	pq.log.Warn("Received next batch", "batch_number", batch.BlockNumber, "batch_epoch", batch.Epoch, "batch_timestamp", batch.Timestamp, "txs", len(batch.Transactions))
+	pq.log.Warn("Received next batch", "batch_epoch", batch.EpochNum, "batch_timestamp", batch.Timestamp, "txs", len(batch.Transactions))
 	pq.batches = append(pq.batches, batch)
 }
 
-func (pq *PayloadQueue) OpenOrigin(origin eth.L1BlockRef) {
-	pq.l1Origins = append(pq.l1Origins, origin)
-	pq.log.Warn("Got next L1 origin", "origin", origin, "first_origin", pq.l1Origins[0])
+func (pq *PayloadQueue) Progress() Progress {
+	return pq.progress
 }
 
-func (pq *PayloadQueue) CloseOrigin() {
-	// IDK WTF this does
-}
-
-func (pq *PayloadQueue) Step(ctx context.Context) error {
+func (pq *PayloadQueue) Step(ctx context.Context, outer Progress) error {
+	if changed, err := pq.progress.Update(outer); err != nil || changed {
+		return err
+	}
 	attr, err := pq.DeriveL2Inputs(ctx, pq.next.SafeL2Head())
 	if err != nil {
 		return err
@@ -102,7 +107,7 @@ func (pq *PayloadQueue) DeriveL2Inputs(ctx context.Context, l2SafeHead eth.L2Blo
 	l1Origin := pq.l1Origins[0]
 
 	// Check if we need to advance an epoch & update local state
-	if l1Origin.Number != uint64(batch.Epoch) {
+	if l1Origin.Number != uint64(batch.EpochNum) {
 		pq.log.Info("advancing epoch in the payload queue")
 		seqNumber = 0
 		// Not enough saved origins to advance an epoch here.
