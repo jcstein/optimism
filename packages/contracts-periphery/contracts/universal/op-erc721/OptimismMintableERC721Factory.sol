@@ -56,11 +56,13 @@ contract OptimismMintableERC721Factory is OwnableUpgradeable {
     /**
      * @notice Creates an instance of the standard ERC721.
      *
-     * @param _remoteToken Address of the corresponding token on the other domain.
-     * @param _name ERC721 name.
-     * @param _symbol ERC721 symbol.
+     * @param _remoteChainId Chain ID where the remote token is deployed.
+     * @param _remoteToken   Address of the corresponding token on the other domain.
+     * @param _name          ERC721 name.
+     * @param _symbol        ERC721 symbol.
      */
     function createStandardOptimismMintableERC721(
+        uint256 _remoteChainId,
         address _remoteToken,
         string memory _name,
         string memory _symbol
@@ -76,6 +78,7 @@ contract OptimismMintableERC721Factory is OwnableUpgradeable {
 
         OptimismMintableERC721 localToken = new OptimismMintableERC721(
             bridge,
+            _remoteChainId,
             _remoteToken,
             _name,
             _symbol

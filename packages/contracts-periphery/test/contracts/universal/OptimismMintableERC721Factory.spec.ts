@@ -20,7 +20,7 @@ describe('OptimismMintableERC721Factory', () => {
   let L1ERC721: MockContract<Contract>
   let OptimismMintableERC721Factory: Contract
   let baseURI: string
-  let chainId: number
+  const remoteChainId = 100
 
   beforeEach(async () => {
     ;[signer] = await ethers.getSigners()
@@ -35,12 +35,11 @@ describe('OptimismMintableERC721Factory', () => {
       await ethers.getContractFactory('OptimismMintableERC721Factory')
     ).deploy(DUMMY_L2_BRIDGE_ADDRESS)
 
-    chainId = await signer.getChainId()
     baseURI = ''.concat(
       'ethereum:',
       L1ERC721.address.toLowerCase(),
       '@',
-      chainId.toString(),
+      remoteChainId.toString(),
       '/tokenURI?uint256='
     )
   })
@@ -54,6 +53,7 @@ describe('OptimismMintableERC721Factory', () => {
   it('should be able to create a standard ERC721 contract', async () => {
     const tx =
       await OptimismMintableERC721Factory.createStandardOptimismMintableERC721(
+        remoteChainId,
         L1ERC721.address,
         'L2ERC721',
         'ERC'
@@ -94,6 +94,7 @@ describe('OptimismMintableERC721Factory', () => {
   it('should not be able to create a standard token with a 0 address for l1 token', async () => {
     await expect(
       OptimismMintableERC721Factory.createStandardOptimismMintableERC721(
+        remoteChainId,
         ethers.constants.AddressZero,
         'L2ERC721',
         'ERC'
