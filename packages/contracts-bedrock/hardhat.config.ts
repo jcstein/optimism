@@ -37,7 +37,8 @@ const config: HardhatUserConfig = {
     devnetL1: {
       url: 'http://localhost:8545',
       accounts: [
-        'ac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80',
+        'E7FD96CC7C23BC1F1C4B9E131EA254028CC212118EA927751EB7B29E441D5024'
+        // 'ac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80',
       ],
     },
     goerli: {
