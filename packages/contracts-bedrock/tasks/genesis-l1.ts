@@ -65,8 +65,6 @@ task('genesis-l1', 'create a genesis config')
       }
     }
 
-    console.log("past getAddress(account)")
-
     const timestamp = hre.deployConfig.startingTimestamp
     if (timestamp === undefined) {
       throw new Error('Must configure starting block timestamp')
