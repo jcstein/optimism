@@ -227,6 +227,7 @@ task('genesis-l2', 'create a genesis config')
         storage: {},
       }
 
+      console.log("getStorageLayout: ", name)
       const storageLayout = await getStorageLayout(hre, name)
       const slots = computeStorageSlots(storageLayout, variables[name])
 

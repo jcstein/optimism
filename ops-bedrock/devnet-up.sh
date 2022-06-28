@@ -65,15 +65,15 @@ fi
 
 # Regenerate the L1 genesis file if necessary. The existence of the genesis
 # file is used to determine if we need to recreate the devnet's state folder.
-# if [ ! -f ./.devnet/genesis-l1.json ]; then
-#   echo "Regenerating L1 genesis."
-#   (
-#     cd $CONTRACTS_BEDROCK
-#     L2OO_STARTING_BLOCK_TIMESTAMP=$GENESIS_TIMESTAMP npx hardhat genesis-l1 \
-#         --outfile genesis-l1.json
-#     mv genesis-l1.json ../../.devnet/genesis-l1.json
-#   )
-# fi
+if [ ! -f ./.devnet/genesis-l1.json ]; then
+  echo "Regenerating L1 genesis."
+  (
+    cd $CONTRACTS_BEDROCK
+    L2OO_STARTING_BLOCK_TIMESTAMP=$GENESIS_TIMESTAMP npx hardhat genesis-l1 \
+        --outfile genesis-l1.json
+    mv genesis-l1.json ../../.devnet/genesis-l1.json
+  )
+fi
 
 # Bring up L1.
 # (
