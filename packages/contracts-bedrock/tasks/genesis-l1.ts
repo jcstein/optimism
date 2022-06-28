@@ -56,7 +56,6 @@ task('genesis-l1', 'create a genesis config')
     for (const signer of signers) {
       accounts.push(signer.address)
     }
-    console.log("past getSigners()")
 
     for (const account of accounts) {
       alloc[ethers.utils.getAddress(account)] = {
