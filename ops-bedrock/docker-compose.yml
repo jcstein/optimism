@@ -13,7 +13,8 @@ volumes:
 services:
   da:
     container_name: da
-    image: "celestia-local-devnet"
+    platform: linux/x86_64
+    image: "ghcr.io/celestiaorg/local-celestia-devnet:main"
     ports:
       - "26657:26657"
       - "26659:26659"
