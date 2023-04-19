@@ -42,7 +42,7 @@ Connect to at least one L1 RPC and L2 execution engine:
 ```shell
 # websockets or IPC preferred for event notifications to improve sync, http RPC works with adaptive polling.
 op \
-  --l1=ws://localhost:9545 --l2=ws//localhost:9001 \
+  --l1=ws://localhost:8546 --l2=ws//localhost:9001 \
   --rollup.config=./path-to-network-config/rollup.json \
   --rpc.addr=127.0.0.1 \
   --rpc.port=7000
