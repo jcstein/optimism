@@ -57,7 +57,7 @@ func NewTransactionManager(log log.Logger, txMgrConfg txmgr.Config, batchInboxAd
 // This is a blocking method. It should not be called concurrently.
 // TODO: where to put concurrent transaction handling logic.
 func (t *TransactionManager) SendTransaction(ctx context.Context, data []byte) (*types.Receipt, error) {
-	res, err := t.daClient.SubmitPFD(ctx, t.namespaceId, data, 20000, 700000)
+	res, err := t.daClient.SubmitPFB(ctx, t.namespaceId, data, 20000, 700000)
 	if err != nil {
 		t.log.Warn("unable to publish tx to celestia", "err", err)
 		return nil, err

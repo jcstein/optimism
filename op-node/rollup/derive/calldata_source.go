@@ -142,7 +142,7 @@ func DataFromEVMTransactions(config *rollup.Config, daConfig *rollup.DAConfig, b
 
 // decodeETHData will decode the data retrieved from the EVM, this data
 // was previously posted from op-batcher and contains the block height
-// with transaction index of the SubmitPFD transaction to the DA.
+// with transaction index of the SubmitPFB transaction to the DA.
 func decodeETHData(celestiaData []byte) (int64, int64, error) {
 	buf := bytes.NewBuffer(celestiaData)
 	var height int64
