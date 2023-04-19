@@ -3,8 +3,8 @@ module github.com/ethereum-optimism/optimism/op-batcher
 go 1.18
 
 require (
-	github.com/celestiaorg/go-cnc v0.2.0
-	github.com/ethereum-optimism/go-ethereum-hdwallet v0.1.3
+	github.com/celestiaorg/go-cnc v0.3.0
+	github.com/ethereum-optimism/go-ethereum-hdwallet v0.1.3 // indirect
 	github.com/ethereum-optimism/optimism/op-node v0.10.13
 	github.com/ethereum-optimism/optimism/op-service v0.10.13
 	github.com/ethereum-optimism/optimism/op-signer v0.1.0

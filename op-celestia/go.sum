@@ -1,5 +1,5 @@
-github.com/celestiaorg/go-cnc v0.2.0 h1:QBcWz1v6341r+5Urbr/eaCm9S8D2wwEwielKcwBc1Z4=
-github.com/celestiaorg/go-cnc v0.2.0/go.mod h1:CZBVUhQnJnAVcfQnnEAqREF+PNWr97m/BhJ5fp1K44Q=
+github.com/celestiaorg/go-cnc v0.3.0 h1:eAVPNHGpx+2sBO7NZyQ1+VW8rzf6W4FQDlSq6aqSTsM=
+github.com/celestiaorg/go-cnc v0.3.0/go.mod h1:zYzvHudSd1iNPuHBMyvZ1YvWou5aT9JXgtch9Tkaf70=
 github.com/go-resty/resty/v2 v2.7.0 h1:me+K9p3uhSmXtrBZ4k9jcEAfJmuC8IivWHwaLZwPrFY=
 github.com/go-resty/resty/v2 v2.7.0/go.mod h1:9PWDzw47qPphMRFfhsyk0NnSgvluHcljSMVIq3w7q0I=
 github.com/gogo/protobuf v1.3.2 h1:Ov1cvc58UF3b5XjBnZv7+opcTcQFZebYjWzi34vdm4Q=

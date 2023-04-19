@@ -5,7 +5,7 @@ go 1.18
 require (
 	github.com/btcsuite/btcd v0.23.3
 	github.com/btcsuite/btcd/chaincfg/chainhash v1.0.1
-	github.com/celestiaorg/go-cnc v0.2.0
+	github.com/celestiaorg/go-cnc v0.3.0
 	github.com/decred/dcrd/dcrec/secp256k1/v4 v4.1.0
 	github.com/ethereum-optimism/optimism/op-bindings v0.10.13
 	github.com/ethereum-optimism/optimism/op-chain-ops v0.10.13
@@ -26,7 +26,7 @@ require (
 	github.com/multiformats/go-multiaddr-dns v0.3.1
 	github.com/olekukonko/tablewriter v0.0.5
 	github.com/prometheus/client_golang v1.13.0
-	github.com/stretchr/testify v1.8.1
+	github.com/stretchr/testify v1.8.2
 	github.com/urfave/cli v1.22.9
 	golang.org/x/term v0.0.0-20220722155259-a9ba230a4035
 )
